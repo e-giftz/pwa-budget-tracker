@@ -1,13 +1,10 @@
 let db;
-let budgetVersion;
 
 // Create a new db request for a "budget" database.
-const request = indexedDB.open('BudgetDB', 1);
+const request = indexedDB.open('budget', 1);
 
 request.onupgradeneeded = function (e) {
-    console.log('Upgrade needed in IndexDB');
-
-    e.target.result.createObjectStore("pending", {
+    e.target.result.createObjectStore('pending', {
         keyPath: "id",
         autoIncrement: true
     });
@@ -18,18 +15,17 @@ request.onerror = function (e) {
 };
 
 request.onsuccess = function (e) {
-    console.log('success');
     db = e.target.result;
   
     // Check if app is online before reading from db
     if (navigator.onLine) {
-      console.log('Backend online! 🗄️');
+      //console.log('Backend online! 🗄️');
       checkDatabase();
     }
 };
 
+// When user creates a transaction offline, call the saveRecord function
 const saveRecord = (record) => {
-    console.log('Save record invoked');
     // Create a transaction on the BudgetStore db with readwrite access
     const transaction = db.transaction('pending', 'readwrite');
   
@@ -41,12 +37,8 @@ const saveRecord = (record) => {
 };
 
 function checkDatabase() {
-    console.log('check db invoked');
-  
     let transaction = db.transaction('pending', 'readonly');
-  
     const store = transaction.objectStore('pending');
-  
     // Get all records from store and set to a variable
     const getAll = store.getAll();
   
@@ -72,12 +64,12 @@ function checkDatabase() {
   
               // Clear existing entries because our bulk add was successful
               currentStore.clear();
-              console.log('Clearing store 🧹');
             }
           });
       }
     };
 }
 
+// Listen for app coming back online
 window.addEventListener('online', checkDatabase);
   
