@@ -1,7 +1,7 @@
 let db;
 
 // Create a new db request for a "budget" database.
-const request = indexedDB.open('budget', 1);
+const request = indexedDB.open('budgettracker', 1);
 
 request.onupgradeneeded = function (e) {
     e.target.result.createObjectStore('pending', {
