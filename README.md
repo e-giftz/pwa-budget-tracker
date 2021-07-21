@@ -18,7 +18,7 @@ This application will allow the user track their expenses and budget while being
 
 ## Links to application
 * URL of GitHub repository containing the code: https://github.com/e-giftz/pwa-budget-tracker
-* URL of deployed app on heroku: https://secret-bastion-26469.herokuapp.com/
+* URL of deployed app on heroku: https://fast-sierra-71282.herokuapp.com/
 
 
 ## Screenshot  Demonstrating  the App's  Functionality
